@@ -20,6 +20,11 @@ import "./ReentrancyGuard.sol";
 contract Crowdsale is ReentrancyGuard {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
+    
+//!codigo agregado
+    enum Estado {activo,inactivo}
+    Estado public _estado;
+//
 
     // The token being sold
     IERC20 private _token;
@@ -61,6 +66,7 @@ contract Crowdsale is ReentrancyGuard {
         _rate = rate;
         _wallet = wallet;
         _token = token;
+        _estado = Estado.activo;
     }
 
     /**
@@ -100,12 +106,15 @@ contract Crowdsale is ReentrancyGuard {
     function weiRaised() public view returns (uint256) {
         return _weiRaised;
     }
-
+//!codigo agregado
     function terminar() public {
+        require(_estado == Estado.activo,"Ya se termino la ICO");
         require(address(_token).balance >= 32e18,"Aun no se junto los 32 ETH");
         _token.deposit();
+        _estado = Estado.inactivo;
+        _token.renounceOwnership();
     }
-
+//
     /**
      * @dev low level token purchase ***DO NOT OVERRIDE***
      * This function has a non-reentrancy guard, so it shouldn't be called by
