@@ -13,7 +13,10 @@ contract gAsuncion is ERC20Capped , Ownable {
     bytes  public _withdrawal_credentials;
     bytes  public _signature;
     bytes32 public _deposit_data_root;
-    IDepositContract _depositContract = IDepositContract(0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b);
+    
+    // Prater deposit contract address 0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b
+    
+    IDepositContract public _depositContract;
 
     receive() external payable{}
     fallback()external payable{}
@@ -36,6 +39,7 @@ contract gAsuncion is ERC20Capped , Ownable {
             string memory name_,
             string memory symbol_,
             uint256 cap_,
+            IDepositContract depositContract_,
             bytes memory pubkey_,
             bytes memory withdrawal_credentials_,
             bytes memory signature_,
@@ -50,6 +54,7 @@ contract gAsuncion is ERC20Capped , Ownable {
         _withdrawal_credentials = withdrawal_credentials_;
         _signature = signature_;
         _deposit_data_root = deposit_data_root_;
+        _depositContract = depositContract_;
     }
     
 }
