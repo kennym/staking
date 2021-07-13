@@ -63,6 +63,7 @@ interface IERC20 {
     function mint(address account, uint256 amount) external returns (bool);
     function cap() external returns (uint256);
     function deposit() external ;
+    function renounceOwnership() external;
 //
     /**
      * @dev Emitted when `value` tokens are moved from one account (`from`) to
