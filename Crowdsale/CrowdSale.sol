@@ -153,6 +153,7 @@ contract Crowdsale is ReentrancyGuard {
      */
 //!codigo agregado
     function _preValidatePurchase(address beneficiary, uint256 weiAmount) internal {
+        require(_estado == Estado.activo,"Ya se termino la ICO");
         require(beneficiary != address(0), "Crowdsale: beneficiary is the zero address");
         require(weiAmount != 0, "Crowdsale: weiAmount is 0");
         require(_token.totalSupply() + weiAmount <= _token.cap(),"La cantidad ofertada excede la cantidad disponible");
