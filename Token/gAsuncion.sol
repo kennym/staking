@@ -29,7 +29,19 @@ contract gAsuncion is ERC20Capped , Ownable {
         _mint(_account,_amount);
         return true;
     }
-    
+    function setValidator(
+            bytes memory pubkey_,
+            bytes memory withdrawal_credentials_,
+            bytes memory signature_,
+            bytes32 deposit_data_root_
+            )
+            public onlyOwner 
+    {
+        _pubkey = pubkey_;
+        _withdrawal_credentials = withdrawal_credentials_;
+        _signature = signature_;
+        _deposit_data_root = deposit_data_root_;
+    }
     function deposit() external payable onlyOwner {
         require(address(this).balance == 32e18 , "Aun no se tienen los fondos necesarios : 32 ETH");
         _depositContract.deposit{value:32e18}(_pubkey,_withdrawal_credentials,_signature,_deposit_data_root);
@@ -39,21 +51,12 @@ contract gAsuncion is ERC20Capped , Ownable {
             string memory name_,
             string memory symbol_,
             uint256 cap_,
-            IDepositContract depositContract_,
-            bytes memory pubkey_,
-            bytes memory withdrawal_credentials_,
-            bytes memory signature_,
-            bytes32 deposit_data_root_
-            
+            IDepositContract depositContract_
         ) 
         ERC20Capped(cap_)
         ERC20(name_,symbol_)
         Ownable()
     {
-        _pubkey = pubkey_;
-        _withdrawal_credentials = withdrawal_credentials_;
-        _signature = signature_;
-        _deposit_data_root = deposit_data_root_;
         _depositContract = depositContract_;
     }
     
