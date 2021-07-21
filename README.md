@@ -1,4 +1,4 @@
-# staking
+# Staking con amigos
 
 Este proyecto pretende desarrollar un contrato inteligente que actue como llave de retiro en un validador eth2.0. 
 
