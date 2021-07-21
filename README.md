@@ -25,7 +25,7 @@ la rama doc-org para el contrato del crowdsale.
 	* descargar el binario de eth2deposit desde github
 	https://github.com/ethereum/eth2.0-deposit-cli/releases/download/v1.2.0/eth2deposit-cli-256ea21-linux-amd64.tar.gz
 	
-	* generar la llave de tu validor seteando como withdrawl-key el smartcontract gAsuncion.
+	* generar la llave de tu validador seteando como withdrawl-key el smartcontract gAsuncion.
 	./deposit new-mnemonic --eth1_withdrawal_address 0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8  --num_validators 1 --chain prater --mnemonic_language english
 
 Esto creara dos archivos dentro de la carpeta validator_keys
